@@ -1,14 +1,14 @@
 
 
 users_list = [
-    {"name":"Kacperek", "nick":"hajdun", "posts":47},
-    {"name":"Jurek", "nick":"Juraso", "posts":47},
-    {"name":"Elizabeth", "nick":"una", "posts":47},
-    {"name":"adma", "nick":"kloc", "posts":47},
-    {"name":"kasia", "nick":"woker", "posts":47},
+    {"name":"Kacperek", "nick":"hajdun", "posts":12},
+    {"name":"Jurek", "nick":"Juraso", "posts":54},
+    {"name":"Elizabeth", "nick":"una", "posts":76},
+    {"name":"adma", "nick":"kloc", "posts":11},
+    {"name":"kasia", "nick":"woker", "posts":0},
     {"name":"tom", "nick":"ajdu", "posts":89},
-    {"name":"elojzy", "nick":"reto", "posts":37},
-    {"name":"tadek", "nick":"vibe", "posts":27},
-    {"name":"monik", "nick":"lelo", "posts":49},
+    {"name":"elojzy", "nick":"reto", "posts":3},
+    {"name":"tadek", "nick":"vibe", "posts":273},
+    {"name":"monik", "nick":"lelo", "posts":4921},
     {"name":"agetke", "nick":"dzala", "posts":54}
     ]
