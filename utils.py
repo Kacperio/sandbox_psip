@@ -40,14 +40,14 @@ def GUI(users_list):
             f'2: dodaj ich\n'
             f'3: usun frajerof\n'
             f'4. modyfikuj wacpanuw\n'
-            f'5. Mapa ćwoka\n'
-            f'6. Pejzarz mułów')
+            f'5. mapa ćwoka\n'
+            f'6. pejzarz mułów')
         wyb = int(input('podaj docelowa funkcja '))
         print('wybrano', wyb)
 
         match wyb:
             case 0:
-                print('sajonara')
+                print('\nsajonara')
                 break
             case 1:
                 print('wyswietlam liste')
@@ -66,7 +66,7 @@ def GUI(users_list):
                 user = input('podaj jego godności: ')
                 for item in users_list:
                     if item['name'] == user:
-                        get_map_of_single(user)
+                        get_map_of_single(item)
             case 6:
                 print('Wielki pejzarz wszsytkich mółów')
                 get_map_of(users_list)
@@ -101,11 +101,11 @@ def get_coords(city:str)->list[float,float]:
 
 def get_map_of_single(user:str):
     siti = get_coords(user['city'])
-
     mapa = folium.Map(location=siti, tiles='OpenStreetMap', zoom_start=14)
-    folium.Marker(location=siti, popup=f"HALABARDAAAA\n{user['name']}").add_to(mapa)
+    folium.Marker(location=siti, popup=f"Melina osobliwości\n{user['name']}").add_to(mapa)
 
-    mapa.save(f'mapka{user["name"]}.html')
+    mapa.save(f'map_{user["name"]}.html')
+    print('\nWydano')
 
 def get_map_of(users):
     mapa = folium.Map(location=[52.3, 21.0] , tiles='OpenStreetMap', zoom_start=7)
@@ -114,5 +114,4 @@ def get_map_of(users):
         aa = get_coords(city=user['city'])
         folium.Marker(location=aa, popup=f"HALABARDAAAA\n{user['name']}").add_to(mapa)
     print('\nWydrukowano')
-    # mapa.save(f'mapeeeczka.html')
-
+    mapa.save(f'mapeeeczka.html')
