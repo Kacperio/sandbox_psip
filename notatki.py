@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+import folium
+
 
 miasteczka = ['Kutno', 'Warszawa', 'Zamość']
 # city = input('Podaj nazwę jakiejś dziury: ')
@@ -24,5 +26,13 @@ def get_coords(city:str)->list[float,float]:
 
     return [res_h_lat,res_h_lon]
 
+# for xx in miasteczka:
+#     print(get_coords(xx))
+
+siti = get_coords(city='Kutno')
+mapa = folium.Map(location=siti, tiles='OpenStreetMap', zoom_start=7)
+
 for xx in miasteczka:
-    print(get_coords(xx))
+    folium.Marker(location=get_coords(xx), popup="HALABARDAAAA").add_to(mapa)
+
+mapa.save('mapka.html')
