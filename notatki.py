@@ -1,22 +1,36 @@
 ## Tutaj odbywają się rzeczy trochę tajemne
-import requests
 
-class User:
-    def __init__(self, town) -> None:
-        self.town = town
+import sqlalchemy
 
-    def pogoda_z(self, town:str):
+db_params = sqlalchemy.URL.create(
+    drivername='postgresql+psycopg2',
+    username='postgres',
+    password='123',
+    host='localhost',
+    database='postgres',
+    port=5432
+)
 
-        url = f"https://danepubliczne.imgw.pl/api/data/synop/station/{town}"
-        return requests.get(url).json()
+engine = sqlalchemy.create_engine(db_params)
+connection = engine.connect()
+
+lamus = 'stasiu'
+mul = 'hajdun'
 
 
-npc_1 = User(town= 'warszawa')
-npc_2 = User(town= 'zamosc')
+def add_sql(lamus):
+    sql_query = sqlalchemy.text(f"INSERT INTO public.my_table(name) VALUES ('{lamus}');")
+    connection.execute(sql_query)
+    connection.commit()
 
-print(npc_1.town)
-print(npc_2.town)
+def remove_sql(lamus):
+    sql_query = sqlalchemy.text(f"DELETE FROM public.my_table WHERE name = '{lamus}';")
+    connection.execute(sql_query)
+    connection.commit()
 
-print(npc_1.pogoda_z(npc_1.town))
-print(npc_2.pogoda_z(npc_2.town))
+def updage_sql(outout,inin):
+    sql_query = sqlalchemy.text(f"UPDATE public.my_table SET name='{inin}' WHERE name='{outout}';")
+    connection.execute(sql_query)
+    connection.commit()
 
+# updage_sql(mul, lamus)
