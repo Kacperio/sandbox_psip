@@ -108,6 +108,7 @@ def get_map_of_single(user:str):
     print('\nWydano')
 
 def get_map_of(users):
+
     mapa = folium.Map(location=[52.3, 21.0] , tiles='OpenStreetMap', zoom_start=7)
     
     for user in users:
@@ -115,3 +116,8 @@ def get_map_of(users):
         folium.Marker(location=aa, popup=f"HALABARDAAAA\n{user['name']}").add_to(mapa)
     print('\nWydrukowano')
     mapa.save(f'mapeeeczka.html')
+
+def pogoda_z(town:str):
+    
+    url = f"https://danepubliczne.imgw.pl/api/data/synop/station/{town}"
+    return requests.get(url).json()
