@@ -1,4 +1,4 @@
-## Tutaj odbywają się rzeczy trochę tajemne
+## nalezy dodac ectation
 
 import sqlalchemy.orm
 from sqlalchemy.orm import sessionmaker
@@ -36,40 +36,3 @@ Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
-
-# ## Create
-
-lista_mulow: list = []
-fake = Faker()
-
-for item in range(100):
-    lista_mulow.append(
-        User(
-            name = fake.name(),
-            location = f'POINT({random.uniform(14,24)} {random.uniform(49,55)})'
-        )
-    )
-
-
-session.add_all(lista_mulow)
-session.commit()
-
-## Read
-
-muls_form_db = session.query(User).all()
-muls_form_db = session.query(User).filter(User.name=='Zdziuchu')
-
-for user in muls_form_db:
-    if user.name == 'Zdziuchu':
-        user.name = 'Jachu'
-
-## delate
-for user in muls_form_db:
-    if user.name == 'Jachu':
-        
-
-
-
-session.flush()
-connection.close()
-engine.dispose()
