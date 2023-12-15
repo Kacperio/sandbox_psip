@@ -3,6 +3,22 @@ from bs4 import BeautifulSoup
 import requests
 import folium
 
+def add_sql(lamus):
+    sql_query = sqlalchemy.text(f"INSERT INTO public.my_table(name) VALUES ('{lamus}');")
+    connection.execute(sql_query)
+    connection.commit()
+
+def remove_sql(lamus):
+    sql_query = sqlalchemy.text(f"DELETE FROM public.my_table WHERE name = '{lamus}';")
+    connection.execute(sql_query)
+    connection.commit()
+
+def updage_sql(outout,inin):
+    sql_query = sqlalchemy.text(f"UPDATE public.my_table SET name='{inin}' WHERE name='{outout}';")
+    connection.execute(sql_query)
+    connection.commit()
+# TODO funkcje wyżej rozwinąć do postaci domyślnej bazy, dodać elementy, dodać do analicznych (je też uzupełnić)
+
 def add_user_to(users_list:list) -> None:
     name = input('Pod1aj imię: ')
     nick = input('Podaj ksyweczke: ')
