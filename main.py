@@ -5,7 +5,7 @@ GUI(users_list)
 
 # TODO dodac tabele do bazy danych reprezentujaca uzytkownika
 # TODO wlaczyc do kodu obsluge bazy danych
-# TODO napisac klase uzytkownika o strukturze zgodnej z user_list (sama definicja)
+# TODO  napisac klase uzytkownika o strukturze zgodnej z user_list (sama definicja)
 # TODO sprawko z ww do 20.12 (sroda)
 # ma zawierac: tytulowa
 # spis
