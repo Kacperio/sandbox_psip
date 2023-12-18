@@ -1,5 +1,6 @@
 ## Tutaj odbywają się rzeczy trochę tajemne
 
+
 import sqlalchemy.orm
 from sqlalchemy.orm import sessionmaker
 import os
@@ -18,7 +19,8 @@ db_params = sqlalchemy.URL.create(
     host=os.getenv('POSTGRES_HOST'),
     database=os.getenv('POSTGRES_DB'),
     port=os.getenv('POSTGRES_PORT')
-)
+
+
 
 engine = sqlalchemy.create_engine(db_params)
 connection = engine.connect()
@@ -73,3 +75,4 @@ for user in muls_form_db:
 session.flush()
 connection.close()
 engine.dispose()
+

@@ -3,6 +3,22 @@ from bs4 import BeautifulSoup
 import requests
 import folium
 
+def add_sql(lamus):
+    sql_query = sqlalchemy.text(f"INSERT INTO public.my_table(name) VALUES ('{lamus}');")
+    connection.execute(sql_query)
+    connection.commit()
+
+def remove_sql(lamus):
+    sql_query = sqlalchemy.text(f"DELETE FROM public.my_table WHERE name = '{lamus}';")
+    connection.execute(sql_query)
+    connection.commit()
+
+def updage_sql(outout,inin):
+    sql_query = sqlalchemy.text(f"UPDATE public.my_table SET name='{inin}' WHERE name='{outout}';")
+    connection.execute(sql_query)
+    connection.commit()
+# TODO funkcje wyżej rozwinąć do postaci domyślnej bazy, dodać elementy, dodać do analicznych (je też uzupełnić)
+
 def add_user_to(users_list:list) -> None:
     name = input('Pod1aj imię: ')
     nick = input('Podaj ksyweczke: ')
@@ -108,6 +124,7 @@ def get_map_of_single(user:str):
     print('\nWydano')
 
 def get_map_of(users):
+
     mapa = folium.Map(location=[52.3, 21.0] , tiles='OpenStreetMap', zoom_start=7)
     
     for user in users:
@@ -115,3 +132,8 @@ def get_map_of(users):
         folium.Marker(location=aa, popup=f"HALABARDAAAA\n{user['name']}").add_to(mapa)
     print('\nWydrukowano')
     mapa.save(f'mapeeeczka.html')
+
+def pogoda_z(town:str):
+    
+    url = f"https://danepubliczne.imgw.pl/api/data/synop/station/{town}"
+    return requests.get(url).json()
