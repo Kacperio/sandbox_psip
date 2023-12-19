@@ -37,49 +37,49 @@ class User(Base):
     city = Column(String(100),nullable=True)
     location = Column('geom', Geometry(geometry_type='POINT', srid=4326), nullable=True)
 
-def tabelko_tworca():
-    Base = sqlalchemy.orm.declarative_base()
-    Base.metadata.create_all(engine)
+# def tabelko_tworca():
+#     Base = sqlalchemy.orm.declarative_base()
+#     Base.metadata.create_all(engine)
     
-    cwok_list: list = []
+#     cwok_list: list = []
 
-    for cwok in users_list:
-        siti = get_coords(cwok['city'])
-        cwok_list.append(
-            User(
-                name = cwok['name'],
-                posts = cwok['posts'],
-                nick = cwok['nick'],
-                city = cwok['city'],
-                location = f'POINT({siti[1]} {siti[0]})'
-            )
-        )
-    session.add_all(cwok_list)
-    session.commit()
+#     for cwok in users_list:
+#         siti = get_coords(cwok['city'])
+#         cwok_list.append(
+#             User(
+#                 name = cwok['name'],
+#                 posts = cwok['posts'],
+#                 nick = cwok['nick'],
+#                 city = cwok['city'],
+#                 location = f'POINT({siti[1]} {siti[0]})'
+#             )
+#         )
+#     session.add_all(cwok_list)
+#     session.commit()
 
 
-def add_sgl():
-    # Base = sqlalchemy.orm.declarative_base()
-    # Base.metadata.create_all(engine)
+# def add_sgl():
+#     # Base = sqlalchemy.orm.declarative_base()
+#     # Base.metadata.create_all(engine)
     
-    dodajek = []
-    name = input('Pod1aj imię: ')
-    nick = input('Podaj ksyweczke: ')
-    post = int(input('Ile wstawił postuf: '))
-    melina = input('Podaj meline: ')
-    dodajek.append({"name": name, "nick": nick, "posts": post, 'city':melina})
+#     dodajek = []
+#     name = input('Pod1aj imię: ')
+#     nick = input('Podaj ksyweczke: ')
+#     post = int(input('Ile wstawił postuf: '))
+#     melina = input('Podaj meline: ')
+#     dodajek.append({"name": name, "nick": nick, "posts": post, 'city':melina})
 
-    qq =[]
-    siti = get_coords(melina)
-    qq.append(
-        User(
-            name = name,
-            nick = nick,
-            posts = post,
-            city = melina,
-            location = f'POINT({siti[1]} {siti[0]})'
-            )
-        )
-    session.add_all(qq)
-    session.commit
+#     qq =[]
+#     siti = get_coords(melina)
+#     qq.append(
+#         User(
+#             name = name,
+#             nick = nick,
+#             posts = post,
+#             city = melina,
+#             location = f'POINT({siti[1]} {siti[0]})'
+#             )
+#         )
+#     session.add_all(qq)
+#     session.commit
     

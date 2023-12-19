@@ -1,9 +1,11 @@
 from  dane import users_list
 from utils import GUI, baza_to_zmienna
 from dml import db_params
+from sql_orm import GUI_orm
 
+# GUI(baza_to_zmienna(db_params))
+GUI_orm()
 
-GUI(baza_to_zmienna(db_params))
 
 # TODO dodac tabele do bazy danych reprezentujaca uzytkownika
 # TODO wlaczyc do kodu obsluge bazy danych
