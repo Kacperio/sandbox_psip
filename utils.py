@@ -59,9 +59,8 @@ def GUI(users_list):
             f'6. pejzarz mułów\n'
             f'SQL wita\n'
             f'7. utwórz tabelke\n'
-            f'8. aktualizuj baze danych\n'
-            f'9. wyczyść do zera baze\n'
-            f'10. utwórz tabelke a pppotem wczytaj dane do bazy danych\n')
+            f'8. wyczyść do zera baze\n'
+            f'9. pierwsze uruchomienie -> tabella i danne (przykładowe) oczywiście\n')
         wyb = int(input('podaj docelowa funkcja '))
         print('wybrano', wyb)
 
@@ -94,16 +93,14 @@ def GUI(users_list):
                 print('Wielki pejzarz wszsytkich mółów')
                 get_map_of(users_list)
             case 7:
+                print('Utworzono uber tabbelle')
                 stol_kreajszyn(db_params)
             case 8:
-                print('Następuje aktualizacion bazy danych')
-                aktulizajszyn(users_list, db_params)
-            case 9:
                 print('Fajnie było, ale się skończyło\nniezostało nic')
                 calkowita_zaglada(db_params)
-            case 10:
-                print('Bo odzielnie kliknąć to za cięzko to mosz i to i to')
-                tabelko_tworca_i_dodanie(users_list, db_params)
+            case 9:
+                print('Mosz, bo odczegoś trza zacząć')
+                tabelko_tworca_i_dodanie(db_params)
 
 def update_user(users_list: list[dict, dict]) -> None:
     nick_of_user = input('Podaj nick użytkownika do modyfikacji ')
@@ -169,7 +166,7 @@ class User(Base):
     city = Column(String(100),nullable=True)
     location = Column('geom', Geometry(geometry_type='POINT', srid=4326), nullable=True)
 
-def aktulizajszyn(listeczka, db_params):
+def aktulizajszyn(listeczka, db_params):        ## raczej dublejszyn
     engine = sqlalchemy.create_engine(db_params)
     connection = engine.connect()
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
@@ -190,7 +187,7 @@ def aktulizajszyn(listeczka, db_params):
     session.add_all(cwok_list)
     session.commit()
 
-def tabelko_tworca_i_dodanie(listeczka, db_params):
+def tabelko_tworca_i_dodanie( db_params):
     engine = sqlalchemy.create_engine(db_params)
     connection = engine.connect()
     Session = sqlalchemy.orm.sessionmaker(bind=engine)
@@ -212,7 +209,7 @@ def tabelko_tworca_i_dodanie(listeczka, db_params):
     
     cwok_list: list = []
 
-    for cwok in listeczka:
+    for cwok in users_list:
         siti = get_coords(cwok['city'])
         cwok_list.append(
             User(
@@ -329,4 +326,22 @@ def show_sql(db_params):
     muls_form_db = session.query(User).all()
 
     for user in muls_form_db:
-        print(user.name)
+        print(f"Użytkownik {user.name} mający bazę w {user.city} zaśmiecił tablicę {user.posts} wpisami o niczym")
+
+def baza_to_zmienna(db_params):
+    engine = sqlalchemy.create_engine(db_params)
+    Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    session = Session()
+    
+    working_list = []
+    muls_form_db = session.query(User).all()
+
+    for user in muls_form_db:
+        name = user.name
+        nick = user.nick
+        post = user.posts
+        city = user.city
+        working_list.append({"name": name, "nick": nick, "posts": post, 'city':city}) 
+
+    return working_list
+

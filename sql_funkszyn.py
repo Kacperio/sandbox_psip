@@ -183,7 +183,22 @@ def show_sql():
     for user in muls_form_db:
         print(user.name)
 
-# tabelko_tworca()
-# calkowita_zaglada(db_params)
-# stol_kreajszyn()
-# show_sql()
+###############
+
+def baza_to_zmienna(db_params):
+    engine = sqlalchemy.create_engine(db_params)
+    Session = sqlalchemy.orm.sessionmaker(bind=engine)
+    session = Session()
+    
+    working_list = []
+    muls_form_db = session.query(User).all()
+
+    for user in muls_form_db:
+        name = user.name
+        nick = user.nick
+        post = user.posts
+        city = user.city
+        working_list.append({"name": name, "nick": nick, "posts": post, 'city':city}) 
+
+    return working_list
+
