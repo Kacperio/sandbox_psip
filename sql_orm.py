@@ -43,7 +43,7 @@ def GUI_orm():
             f'5. noc oczyszczenia \n'
             f'6. pokaż jedną z melin \n'
             f'7. Wielki Pejżarz Meliński \n'
-            f'8. dodanie kilku znanym mordek \n')
+            f'8. dodanie kilku znanych mordek \n')
         wyb = int(input('podaj docelową funkcja: '))
         print(f'wybrano {wyb}: \n')
 
@@ -186,10 +186,3 @@ def get_map_of_all():
         folium.Marker(location=aa, popup=f"Gdzień tu campi\n{user.name}").add_to(mapa)
     print('\nWydrukowano')
     mapa.save(f'mapeeeczka.html')
-
-
-GUI_orm()
-# refill_db()
-# clean_table()
-# select_all_sql()
-
